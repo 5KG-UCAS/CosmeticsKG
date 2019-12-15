@@ -4,7 +4,7 @@ enum SyntaxItem{
 }
 public class SyntaxItemPraser {
     static SyntaxItem prase(char c){
-        if
+        
     }
 
 }
