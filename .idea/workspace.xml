@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bd7e0628-cf9d-40e2-a83a-8d45a973d497" name="Default Changelist" comment="" />
+    <list default="true" id="bd7e0628-cf9d-40e2-a83a-8d45a973d497" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_neo4j_driver_neo4j_java_driver_1_7_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/CCG/LambdaExpression.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/KGQA/CCGQA.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/KGQA/SubGraphQA.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/QuestionGraph/QGItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/QuestionGraph/QuestionGraph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CosmeticsKG.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CosmeticsKG.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CCG/CCGRuler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CCG/CCGRule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CCG/Lambda.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CCG/Syntax.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CCG/Syntax.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CCG/SyntaxItem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/KGAQ/SubGraphQA.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/KGAQ/SubGraphQA.class" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +35,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
       <MavenImportingSettings>
@@ -29,7 +49,9 @@
     <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="1U5z7PioT71YV1CQuEMNdD86Ss7" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -41,6 +63,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="project.scopes" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -54,13 +77,39 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="SubGraphQA" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="KGAQ.SubGraphQA" />
+  <component name="RunManager" selected="Application.SubGraphQA">
+    <configuration name="CCGQA" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="KGQA.CCGQA" />
       <module name="CosmeticsKG" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="KGAQ.*" />
+          <option name="PATTERN" value="KGQA.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InfoExtQA" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="KGQA.InfoExtQA" />
+      <module name="CosmeticsKG" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="KGQA.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SubGraphQA" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="KGQA.SubGraphQA" />
+      <module name="CosmeticsKG" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="KGQA.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -71,6 +120,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.SubGraphQA" />
+        <item itemvalue="Application.InfoExtQA" />
+        <item itemvalue="Application.CCGQA" />
       </list>
     </recent_temporary>
   </component>
@@ -92,11 +143,27 @@
       <workItem from="1575455359655" duration="13234000" />
       <workItem from="1575646531556" duration="13000" />
       <workItem from="1576336021417" duration="600000" />
-      <workItem from="1576372734778" duration="3866000" />
+      <workItem from="1576372734778" duration="4133000" />
+      <workItem from="1576398791661" duration="18133000" />
+      <workItem from="1576496130134" duration="6946000" />
+      <workItem from="1576506155229" duration="6773000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

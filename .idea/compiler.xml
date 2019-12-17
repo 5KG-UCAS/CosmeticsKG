@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="CosmeticsKG" target="6" />
+      <module name="CosmeticsKG" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>
