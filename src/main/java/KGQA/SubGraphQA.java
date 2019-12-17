@@ -1,24 +1,26 @@
 package KGQA;
 
 import QuestionGraph.QGItem;
+import QuestionGraph.QGItem.QGItemType;
 import QuestionGraph.QuestionGraph;
 import com.hankcs.hanlp.HanLP;
 import com.hankcs.hanlp.corpus.dependency.CoNll.CoNLLSentence;
 import com.hankcs.hanlp.corpus.dependency.CoNll.CoNLLWord;
-
 import java.io.IOException;
 import java.util.*;
 
-enum Label{
-    Brand,Country,Lipstick,LipstickType,Perfume,PriceRange
-}
-enum Attr{
-    chiName,code,price,size
-}
-enum Return{
-    count,entity,attr,error
-}
+
 public class SubGraphQA {
+
+    public enum Label{
+        Unknow,Brand,Country,Lipstick,LipstickType,Perfume,PriceRange
+    }
+    public enum Attr{
+        chiName,code,price,size
+    }
+    public enum Return{
+        count,entity,attr,error
+    }
 
     public static HashMap<String, Return> question_word = new HashMap<>();
     public static HashMap<String, Label> label_word = new HashMap<>();
@@ -108,10 +110,10 @@ public class SubGraphQA {
             size = graph.getSize();
             for (CoNLLWord word : coNLLSentence) {
                 if (word.CPOSTAG == "1" || graph.hasNode(word.ID)) {
-                    QGItem i1 = new QGItem(word.ID, word.POSTAG, word.LEMMA);
+                    QGItem i1 = new QGItem(word.ID, QGItemType.valueOf(word.POSTAG), word.LEMMA);
                     graph.addNode(i1);
                     if (word.HEAD != CoNLLWord.ROOT) {
-                        QGItem i2 = new QGItem(word.HEAD.ID, word.HEAD.POSTAG, word.HEAD.LEMMA);
+                        QGItem i2 = new QGItem(word.HEAD.ID, QGItemType.valueOf(word.HEAD.POSTAG), word.HEAD.LEMMA);
                         graph.addNode(i2);
                         graph.addEdge(i1, i2);
                     }

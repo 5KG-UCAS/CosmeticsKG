@@ -1,8 +1,9 @@
 package QuestionGraph;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
-import static QuestionGraph.QGItemType.*;
+import static QuestionGraph.QGItem.QGItemType.*;
 
 /**
  * 使用邻接矩阵存储问题图
@@ -11,11 +12,11 @@ public class QuestionGraph {
 
     private int[][] graph;
 
-    private String questionWord;
-
     private ArrayList<QGItem> nodes;
 
     private ArrayList<Integer> nodeIds;
+
+    private int questionWordIndex = -1;
 
     private int size;
 
@@ -30,6 +31,8 @@ public class QuestionGraph {
             this.nodes.add(item);
             this.nodeIds.add(item.getID());
             this.size++;
+            if (item.getType()==question)
+                this.questionWordIndex = this.nodeIds.indexOf(item.getID());
         }
     }
 
@@ -54,7 +57,7 @@ public class QuestionGraph {
     public void reduce(){
         for (QGItem item : this.nodes){
             int index = nodeIds.indexOf(item.getID());
-            if (item.getType()==QGItemType.other){
+            if (item.getType()==other){
                 int degree = 0;
                 for (int i = 0; i < size; i++) {
                     degree+=this.graph[index][i];
@@ -93,7 +96,6 @@ public class QuestionGraph {
                                 this.graph[labelIndex][i] = 1;
                             }
                         }
-
                     }
                 }
             }
@@ -108,5 +110,59 @@ public class QuestionGraph {
             }
             System.out.println();
         }
+    }
+
+    /**
+     * 解析成cypher
+     * 先转换成问题树
+     * */
+    public String parseCypher(){
+        String cypher = "";
+        if (this.questionWordIndex==-1){
+            return "error";
+        }
+        //问题树，以疑问词为根节点
+        Stack<Integer> stack = new Stack<Integer>();
+        stack.push(questionWordIndex);
+        while (!stack.empty()){
+            int i = stack.pop();
+            QGItem item = this.nodes.get(i);
+            for (int j = 0; j < size; j++) {
+                if (this.graph[i][j]==1){
+                    stack.push(j);
+                    item.addChild(this.nodes.get(j));
+                    this.graph[i][j] = 0;
+                    this.graph[j][i] = 0;
+                }
+            }
+        }
+        //直接递归调用
+        cypher = this.nodes.get(questionWordIndex).getCypher();
+        System.out.println(cypher);
+        return cypher;
+    }
+
+    public static void main(String[] args) {
+//        "和纪梵希禁忌之吻N4的价格区间相同的YSL口红有哪些？"
+        QuestionGraph graph = new QuestionGraph(10);
+        QGItem item1 = new QGItem(1,entity,"3214");
+        QGItem item2 = new QGItem(2,label,"PriceRange");
+        QGItem item3 = new QGItem(3,label,"Lipstick");
+        QGItem item4 = new QGItem(4,entity,"1");
+        QGItem item5 = new QGItem(5,question,"entity");
+        graph.addNode(item1);
+        graph.addNode(item2);
+        graph.addNode(item3);
+        graph.addNode(item4);
+        graph.addNode(item5);
+        graph.addEdge(item1,item2);
+        graph.addEdge(item2,item3);
+        graph.addEdge(item3,item4);
+        graph.addEdge(item3,item5);
+        graph.reduce();
+        graph.printGraph();
+        graph.parseCypher();
+
+
     }
 }
