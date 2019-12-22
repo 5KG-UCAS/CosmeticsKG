@@ -85,7 +85,14 @@ public class QGItem {
                         this.cyphers.add(this.cypherItem.cypher);
                         return this.cypherItem;
                 }
-            }else if (this.type==QGItemType.label){
+            }else if(this.type==QGItemType.entity){
+                String varName = "V"+this.getID();
+                HashMap<String,String> attrs = new HashMap<>();
+                attrs.put("id",this.value);
+                this.cypherItem = CypherItem.praseMatch(varName,null,null,attrs);
+                this.cyphers.add(this.cypherItem.cypher);
+                return this.cypherItem;
+            } else if (this.type==QGItemType.label){
                 String label = this.value;
                 HashMap<String,Integer> ents = new HashMap<>();
                 HashMap<String,String> attrs = new HashMap<>();
@@ -99,7 +106,7 @@ public class QGItem {
                             break;
                         case entity:
                         case label:
-                            ents.put(childItem.returnVar,2);//TODO distance
+                            ents.put(childItem.returnVar,1);//TODO distance
                             break;
                     }
                 }
@@ -117,7 +124,7 @@ public class QGItem {
                         break;
                     case attr:
                     case entity:
-                        this.cyphers.add("return "+key + " as n");
+                        this.cyphers.add("return DISTINCT "+key + " as n limit 10");
                         break;
                 }
 

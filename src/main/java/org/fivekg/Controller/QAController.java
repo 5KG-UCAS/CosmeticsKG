@@ -1,7 +1,10 @@
 package org.fivekg.Controller;
 
+import com.hankcs.hanlp.corpus.dependency.CoNll.CoNLLSentence;
+import com.hankcs.hanlp.corpus.dependency.CoNll.CoNLLWord;
 import org.fivekg.KGQA.SubGraphQA;
 import org.fivekg.Neo4j.SessionCreater;
+import org.fivekg.QuestionGraph.QuestionGraph;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.neo4j.driver.v1.Record;
@@ -16,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
+
 @Controller
 public class QAController {
 
@@ -27,12 +32,14 @@ public class QAController {
     @ResponseBody()
     public String Login(@RequestParam("question")  String question){
         JSONObject jsonObject = new JSONObject();
-        String cypher = SubGraphQA.Question2Cypher(question);
+        HashMap<String,Object> info = new HashMap<>();
+        String cypher = SubGraphQA.Question2Cypher(question,info);
 
         if (cypher.equals("error")){
             jsonObject.put("success",false);
             return jsonObject.toString();
         }
+
         Session session = SessionCreater.getSession();
         jsonObject.put("success",true);
         String type = "";
@@ -45,7 +52,9 @@ public class QAController {
                 if(node.hasLabel("Lipstick")){
                     type = "NODE";
                     JSONObject ls = new JSONObject();
+                    ls.put("id",String.valueOf(node.id()));
                     ls.put("name",node.get("name").asString());
+                    ls.put("image",node.get("image").asString());
                     ls.put("brand",node.get("brand").asString());
                     ls.put("price",node.get("price").asString());
                     data.put(ls);
@@ -64,6 +73,26 @@ public class QAController {
                 return jsonObject.toString();
             }
         }
+        //解析过程树和图
+        JSONArray treeNodes = new JSONArray();
+        JSONArray treeEdges = new JSONArray();
+        for (CoNLLWord word : (CoNLLSentence)info.get("words")){
+            JSONObject treeNode = new JSONObject();
+            treeNode.put("name",word.NAME);
+            treeNode.put("id",word.ID);
+            treeNode.put("type",word.POSTAG);
+            treeNodes.put(treeNode);
+            JSONObject treeEdge = new JSONObject();
+            treeEdge.put("child",word.ID);
+            treeEdge.put("parent",word.HEAD.ID);
+            treeEdges.put(treeEdge);
+        }
+
+
+        jsonObject.put("nodes",treeNodes);
+        jsonObject.put("treeEdges",treeEdges);
+        jsonObject.put("graphEdges",info.get("graph"));
+        jsonObject.put("cypher",cypher);
         jsonObject.put("type",type);
         jsonObject.put("data",data);
         return jsonObject.toString();

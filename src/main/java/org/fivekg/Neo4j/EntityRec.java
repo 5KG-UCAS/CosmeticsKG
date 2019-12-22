@@ -13,7 +13,7 @@ public class EntityRec {
     private static SessionCreater sessionCreater;
 
     public enum Label{
-        Brand,Country,Lipstick,LipstickType,Perfume,PriceRange
+        Brand,Country,Lipstick,LipstickType,Perfume,PriceRange,Color,Comment
     }
     public enum Attr{
         chiName,code,price,size
@@ -38,6 +38,11 @@ public class EntityRec {
         label_word.put("国家", Label.Country);
         label_word.put("品牌", Label.Brand);
         label_word.put("价格区间", Label.PriceRange);
+        label_word.put("色系", Label.Color);
+        label_word.put("颜色", Label.Color);
+        label_word.put("评价", Label.Comment);
+        label_word.put("印象", Label.Comment);
+
 
         attr_word.put("名字", Attr.chiName);
         attr_word.put("色号", Attr.code);
@@ -45,6 +50,7 @@ public class EntityRec {
         attr_word.put("容量", Attr.size);
 
         Session session = SessionCreater.getSession();
+        int count = 0;
         for (Label l : Label.values()){
             String c = String.format("match (n:%s) return n",l.name());
             StatementResult result =session.run(c);
@@ -53,11 +59,18 @@ public class EntityRec {
                 string2Entity.put(r.get("n").get("name").asString(), r.get("n").asNode().id());
                 if(l!=Label.PriceRange)
                     CustomDictionary.insert(r.get("n").get("name").asString(), "N 1000");
+
                 if(l==Label.Brand||l==Label.Country||l==Label.PriceRange)
                     CustomDictionary.insert(r.get("n").get("name").asString(), "ADJ 800");
-
+                if(l==Label.Brand) {
+                    string2Entity.put(r.get("n").get("engName").asString(), r.get("n").asNode().id());
+                    CustomDictionary.insert(r.get("n").get("engName").asString(), "N 1000");
+                    CustomDictionary.insert(r.get("n").get("engName").asString(), "ADJ 800");
+                }
+                count++;
             }
         }
+        System.out.println("add word "+count);
         System.out.println(string2Entity.size());
     }
 

@@ -102,6 +102,14 @@ public class QuestionGraph {
         }
     }
 
+    public int[][] getGraph() {
+        return graph;
+    }
+
+    public ArrayList<Integer> getNodeIds() {
+        return nodeIds;
+    }
+
     public void printGraph(){
         System.out.println(this.nodes);
         for (int i = 0; i < this.size; i++) {
