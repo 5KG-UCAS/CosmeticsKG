@@ -2,6 +2,7 @@
 一个以化妆品为主题的知识图谱项目。目前包含3000节点，15000边，口红和香水两种品类。支持图谱检索、智能问答。
 
 [点此查看项目Demo](http://60.205.227.226:8080/CosmeticsKG-Web/)
+- 2023.2.46 应各位需求，现将相关资料打包：[百度云链接](https://pan.baidu.com/s/1MLivu-yKH7h0PVKsJBs2cw?pwd=fbx1)。Demo链接已失效，后续有时间考虑重新部署。
 
 ![](images/exampleKG.jpg)
 ## 0.介绍
